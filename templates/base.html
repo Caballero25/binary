@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mi Sitio{% endblock %}</title>
+    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoco7k8rn48qgh0RCb_djTMG5exTpx_C56xg&s">
+    <!-- Enlace a CSS de Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    {% block extra_head %}{% endblock %}
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+        main {
+            flex: 1;
+        }
+        footer {
+            background: #f1f1f1;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <small class="navbar-brand" href="#">Artc Ic Tech.</small>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'menu-principal' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+            <li class="nav-item active">
+                <a class="nav-link" href="/admin">Admin <span class="sr-only">(current)</span></a>
+            </li>
+            {% endif %}
+            {% else %}
+            {% endif %}
+                        
+          </ul>
+          <div class="form-inline my-2 my-lg-0">
+           <small class="navbar-brand" >Bienvenido {{request.user.username}}</small>
+           <a href="{% url 'logout' %}" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Cerrar Sesión</a>
+          </div>
+        </div>
+      </nav>  
+      {% endif %}
+    {% block content %}
+        <!-- Contenido de la página -->
+    {% endblock %}
+    <footer class="bg-body-tertiary text-center text-lg-start">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+          ©2024 Copyright:
+          <small class="text-body">Art Ic Tech.</small>
+        </div>
+        <!-- Copyright -->
+      </footer>
+</body>
+
