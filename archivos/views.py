@@ -31,7 +31,7 @@ def subirArchivo(request):
                 archivoX = archivoUnic.archivoUnico
                 directorio_destino = os.path.join(settings.MEDIA_ROOT, 'copias')
                 fs = FileSystemStorage(location=directorio_destino)
-                nombre_archivo = fs.save(auditarNombreArchivo(offset3E0_ascii), archivoX)
+                nombre_archivo = fs.save(auditarNombreArchivo(offset3E0_ascii)+".bin", archivoX)
                 print(nombre_archivo)
             except:
                 print(8)
@@ -89,7 +89,7 @@ def correo(nombreUsuario, correoUsuario, nombreAntiguoArchivo, nombreNuevoArchiv
         body = 'Subject: {}\n\n{}'.format(asunto, mensaje)
         server = smtplib.SMTP('smtp.gmail.com','587')
         server.starttls()
-        server.login('artcictechsystem@gmail.com','njyh xnqq mcet ifij')
+        server.login('artcictechsystem@gmail.com','password')
         server.sendmail('artcictechsystem@gmail.com', correo_electronico, body.encode('utf-8'))
         server.quit()
     except:

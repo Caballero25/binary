@@ -80,11 +80,14 @@ WSGI_APPLICATION = 'binarios.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ArtcIcTechSystem$default',
+        'USER': 'ArtcIcTechSystem',
+        'PASSWORD': 'Admin123.',
+        'HOST': 'ArtcIcTechSystem.mysql.pythonanywhere-services.com',  # O la dirección IP de tu servidor de base de datos
+        'PORT': '3306',  # Puerto predeterminado para MySQL
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

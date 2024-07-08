@@ -36,15 +36,20 @@
 
           // Crear un enlace de descarga del archivo renombrado
           var url = response.archivo_url;
-          var nuevoNombre = response.nuevoNombre; // Nombre nuevo del archivo
           var a = document.createElement("a");
           a.href = url;
-          a.download = nuevoNombre;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
+          var nombreModificado = url.replace("/media/copias/", "");
+          a.textContent = "Descargar " + nombreModificado; // Agregar texto al enlace
+          // Añadir estilos al enlace
+          a.style.color = "blue";
+          a.style.textDecoration = "none";
+          a.classList.add("link")
+
+          // Agregar el enlace al elemento con la clase "descargar"
+          $(".descargar").append(a);
         },
         error: function (response, xhr, status, error) {
+          alert("Algo salió mal")
           $("#mensaje").text("Error al subir el archivo: " + error);
         },
       });
@@ -83,6 +88,9 @@
               </div>
               <div class="preview-container" id="previewContainer"></div>
               <button class="btn btn-outline-info" id="sendFileButton" type="submit">Enviar</button>
+              <div class="descargar">
+
+              </div>
           </div>
           <div class="modal" id="myModal">
               <span class="close" id="closeModal">&times;</span>
